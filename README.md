@@ -1,7 +1,7 @@
 # Ayaml
 
 [![Build Status](https://travis-ci.org/gong023/Ayaml.svg)](https://travis-ci.org/gong023/Ayaml)
-[![Coverage Status](https://img.shields.io/coveralls/gong023/Ayaml.svg)](https://coveralls.io/r/gong023/Ayaml)
+[![Coverage Status](https://img.shields.io/coveralls/gong023/Ayaml.svg?style=flat)](https://coveralls.io/r/gong023/Ayaml)
 
 Utility for making Array from Yaml.
 
@@ -10,7 +10,7 @@ Utility for making Array from Yaml.
 Install Ayaml
 
 ```bash
-composer require --dev gong023/Ayaml:dev-master
+composer require --dev gong023/ayaml:dev-master
 ```
 
 Register yaml dir in testing bootstrap.php

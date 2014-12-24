@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/gong023/Ayaml.svg)](https://travis-ci.org/gong023/Ayaml)
 
 ```yaml
 # hoge.yaml

@@ -7,3 +7,4 @@ php:
 
 before_script:
   - mkdir -p build/logs
+  - composer install

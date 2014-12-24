@@ -8,3 +8,6 @@ php:
 before_script:
   - mkdir -p build/logs
   - composer install
+
+after_script:
+ - php vendor/bin/coveralls -v

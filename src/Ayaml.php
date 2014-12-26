@@ -11,40 +11,40 @@ class Ayaml
     /**
      * @var null|string
      */
-    private static $base_path = null;
+    private static $basePath = null;
 
     /**
-     * @param string $file_name
+     * @param string $fileName
      * @return Container
      * @throws AyamlBasePathNotFoundException
      * @throws AyamlFixtureFileNotFoundException
      */
-    public static function file($file_name)
+    public static function file($fileName)
     {
-        if (is_null(self::$base_path)) {
+        if (is_null(self::$basePath)) {
             throw new AyamlBasePathNotFoundException();
         }
 
-        if (file_exists(self::$base_path.'/'.$file_name)) {
-            $real_file_path = self::$base_path.'/'.$file_name;
-        } elseif (file_exists(self::$base_path.'/'.$file_name.'.yml')) {
-            $real_file_path = self::$base_path.'/'.$file_name.'.yml';
-        } elseif (file_exists(self::$base_path.'/'.$file_name.'.yaml')) {
-            $real_file_path = self::$base_path.'/'.$file_name.'.yaml';
+        if (file_exists(self::$basePath.'/'.$fileName)) {
+            $realFilePath = self::$basePath.'/'.$fileName;
+        } elseif (file_exists(self::$basePath.'/'.$fileName.'.yml')) {
+            $realFilePath = self::$basePath.'/'.$fileName.'.yml';
+        } elseif (file_exists(self::$basePath.'/'.$fileName.'.yaml')) {
+            $realFilePath = self::$basePath.'/'.$fileName.'.yaml';
         } else {
-            throw new AyamlFixtureFileNotFoundException('base path: '.self::$base_path.' / file name:'.$file_name);
+            throw new AyamlFixtureFileNotFoundException('base path: ' . self::$basePath . ' / file name:' . $fileName);
         }
 
-        $raw_data = new RawData($real_file_path);
+        $rawData = new RawData($realFilePath);
 
-        return new Container($raw_data);
+        return new Container($rawData);
     }
 
     /**
-     * @param string $base_path
+     * @param string $basePath
      */
-    public static function registerBasePath($base_path)
+    public static function registerBasePath($basePath)
     {
-        self::$base_path = preg_replace('/\/$/', '', $base_path);
+        self::$basePath = preg_replace('/\/$/', '', $basePath);
     }
 }

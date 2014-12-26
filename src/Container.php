@@ -10,19 +10,19 @@ class Container
     /**
      * @var RawData
      */
-    private $raw_data;
+    private $rawData;
 
     /**
      * @var null|array
      */
-    private $result_data = null;
+    private $resultData = null;
 
     /**
-     * @param RawData $raw_data
+     * @param RawData $rawData
      */
-    public function __construct(RawData $raw_data)
+    public function __construct(RawData $rawData)
     {
-        $this->raw_data = $raw_data;
+        $this->rawData = $rawData;
     }
 
     /**
@@ -32,7 +32,7 @@ class Container
      */
     public function schema($name)
     {
-        $this->result_data = $this->raw_data->getSchema($name);
+        $this->resultData = $this->rawData->getSchema($name);
 
         return $this;
     }
@@ -44,13 +44,13 @@ class Container
      */
     public function with(array $overwrites)
     {
-        if (is_null($this->result_data)) {
+        if (is_null($this->resultData)) {
             $message = 'you should set schema before "with". ex.) Ayaml::file("f")->schema("s")->with(["k" => "v"])->dump()';
             throw new AyamlSchemaNotSpecifiedException($message);
         }
         foreach ($overwrites as $overwrite_key => $overwrite_val) {
-            if (isset($this->result_data[$overwrite_key])) {
-                $this->result_data[$overwrite_key] = $overwrite_val;
+            if (isset($this->resultData[$overwrite_key])) {
+                $this->resultData[$overwrite_key] = $overwrite_val;
             }
         }
 
@@ -62,6 +62,6 @@ class Container
      */
     public function dump()
     {
-        return $this->result_data;
+        return $this->resultData;
     }
 }

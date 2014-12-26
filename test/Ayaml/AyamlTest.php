@@ -13,9 +13,9 @@ class AyamlTest extends \PHPUnit_Framework_TestCase
      * @test
      * @dataProvider fileNameProvider
      */
-    public function returnContainerWithCorrectingYamlFileExtension($given_name)
+    public function returnContainerWithCorrectingYamlFileExtension($givenName)
     {
-        $this->assertInstanceOf('\Ayaml\Container', Ayaml::file($given_name));
+        $this->assertInstanceOf('\Ayaml\Container', Ayaml::file($givenName));
     }
 
     public static function fileNameProvider()

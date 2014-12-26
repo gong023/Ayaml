@@ -23,16 +23,16 @@ class RawData
     }
 
     /**
-     * @param  string                       $schema_name
+     * @param  string                       $schemaName
      * @return array
      * @throws AyamlSchemaNotFoundException
      */
-    public function getSchema($schema_name)
+    public function getSchema($schemaName)
     {
-        if (empty($this->data[$schema_name])) {
-            throw new AyamlSchemaNotFoundException('specified schema: '.$schema_name);
+        if (empty($this->data[$schemaName])) {
+            throw new AyamlSchemaNotFoundException('specified schema: ' . $schemaName);
         }
 
-        return $this->data[$schema_name];
+        return $this->data[$schemaName];
     }
 }

@@ -3,6 +3,7 @@
 namespace Ayaml\Sequence\Calculator\Datetime;
 
 use Ayaml\Sequence\Calculator;
+use Carbon\Carbon;
 
 /**
  * Class Incrementer
@@ -14,62 +15,63 @@ use Ayaml\Sequence\Calculator;
 class Incrementer extends Calculator implements DatetimeCalculatorInterface
 {
     /**
+     * @param string $overwriteVal
      * @return bool
      */
-    function isEnd()
+    function isEnd($overwriteVal)
     {
-        return $this->criteria->gte($this->end);
+        return Carbon::parse($overwriteVal)->gte($this->end);
     }
 
     public function byDay($format = null)
     {
         return $this->by(function () use ($format) {
-            $this->criteria->addDay();
+            $aDayAfter = $this->criteria->copy()->addDay();
 
             if (! is_null($format)) {
-                return $this->criteria->format($format);
+                return $aDayAfter->format($format);
             }
 
-            return $this->criteria->toDateTimeString();
+            return $aDayAfter->toDateTimeString();
         });
     }
 
     public function byWeek($format = null)
     {
         return $this->by(function () use ($format) {
-            $this->criteria->addWeek();
+            $aWeekAfter = $this->criteria->copy()->addWeek();
 
             if (! is_null($format)) {
-                return $this->criteria->format($format);
+                return $aWeekAfter->format($format);
             }
 
-            return $this->criteria->toDateTimeString();
+            return $aWeekAfter->toDateTimeString();
         });
     }
 
     public function byMonth($format = null)
     {
         return $this->by(function () use ($format) {
-            $this->criteria->addMonth();
+            $aMonthAfter = $this->criteria->copy()->addMonth();
 
             if (! is_null($format)) {
-                return $this->criteria->format($format);
+                return $aMonthAfter->format($format);
             }
 
-            return $this->criteria->toDateTimeString();
+            return $aMonthAfter->toDateTimeString();
         });
     }
 
     public function byYear($format = null)
     {
         return $this->by(function () use ($format) {
-            $this->criteria->addYear();
+            $aYearAfter = $this->criteria->copy()->addYear();
 
             if (! is_null($format)) {
-                return $this->criteria->format($format);
+                return $aYearAfter->format($format);
             }
 
-            return $this->criteria->toDateTimeString();
+            return $aYearAfter->toDateTimeString();
         });
     }
 }

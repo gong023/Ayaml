@@ -8,14 +8,15 @@ class Decrementer extends Calculator implements NumericCalculatorInterface
 {
     public function byOne()
     {
-        return $this->by(function () { $this->criteria -= 1; return $this->criteria; });
+        return $this->by(function () { return $this->criteria - 1; });
     }
 
     /**
+     * @param $overwriteVal
      * @return bool
      */
-    function isEnd()
+    function isEnd($overwriteVal)
     {
-        return $this->criteria <= $this->end;
+        return $overwriteVal <= $this->end;
     }
 }

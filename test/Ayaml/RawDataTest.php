@@ -2,6 +2,7 @@
 namespace Ayaml\Test;
 
 use Ayaml\RawData;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class RawDataTest
@@ -16,7 +17,7 @@ class RawDataTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->subject = new RawData(__DIR__ . '/../SampleYaml/User.yaml');
+        $this->subject = new RawData(Yaml::parse(__DIR__ . '/../SampleYaml/User.yaml'));
     }
 
     /**

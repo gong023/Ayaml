@@ -3,6 +3,7 @@ namespace Ayaml\Test;
 
 use Ayaml\Container;
 use Ayaml\RawData;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class ContainerTest
@@ -17,7 +18,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $rawData = new RawData(__DIR__ . '/../SampleYaml/User.yaml');
+        $rawData = new RawData(Yaml::parse(__DIR__ . '/../SampleYaml/User.yaml'));
         $this->subject = new Container($rawData);
     }
 

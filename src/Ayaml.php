@@ -2,6 +2,8 @@
 
 namespace Ayaml;
 
+use Symfony\Component\Yaml\Yaml;
+
 /**
  * Class Ayaml
  * @package Ayaml
@@ -35,7 +37,7 @@ class Ayaml
             throw new AyamlFixtureFileNotFoundException('base path: ' . self::$basePath . ' / file name:' . $fileName);
         }
 
-        $rawData = new RawData($realFilePath);
+        $rawData = new RawData(Yaml::parse($realFilePath));
 
         return new Container($rawData);
     }
@@ -46,5 +48,10 @@ class Ayaml
     public static function registerBasePath($basePath)
     {
         self::$basePath = preg_replace('/\/$/', '', $basePath);
+    }
+
+    public static function seq(Container $container)
+    {
+        return new ContainerCollection($container);
     }
 }

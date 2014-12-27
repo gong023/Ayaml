@@ -1,8 +1,6 @@
 <?php
 namespace Ayaml;
 
-use Symfony\Component\Yaml\Yaml;
-
 /**
  * Class RawData
  * @package Ayaml
@@ -15,11 +13,11 @@ class RawData
     private $data;
 
     /**
-     * @param string $path
+     * @param string $data
      */
-    public function __construct($path)
+    public function __construct($data)
     {
-        $this->data = Yaml::parse($path);
+        $this->data = $data;
     }
 
     /**

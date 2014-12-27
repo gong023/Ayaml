@@ -1,9 +1,8 @@
 <?php
 
-namespace Ayaml\Sequence\Calculator;
+namespace Ayaml\Sequence\Calculator\Numeric;
 
 use Ayaml\Sequence\Calculator;
-use Ayaml\Sequence\Calculator\Numeric\NumericCalculatorInterface;
 
 class Incrementer extends Calculator implements NumericCalculatorInterface
 {

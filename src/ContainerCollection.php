@@ -1,15 +1,18 @@
 <?php
 namespace Ayaml;
 
-use Ayaml\Sequence\Calculator\Decrementer;
-use Ayaml\Sequence\Calculator\Incrementer;
+use Ayaml\Sequence\Calculator\Numeric\Decrementer as NumericDecrementer;
+use Ayaml\Sequence\Calculator\Numeric\Incrementer as NumericIncrementer;
+use Ayaml\Sequence\Calculator\Datetime\Decrementer as DatetimeDecrementer;
+use Ayaml\Sequence\Calculator\Datetime\Incrementer as DatetimeIncrementer;
+use Carbon\Carbon;
 
 class ContainerCollection
 {
     /**
      * @var Container[]
      */
-    private $containers;
+    private $containers = [];
 
     /**
      * @var Container
@@ -21,17 +24,39 @@ class ContainerCollection
         $this->baseContainer = $container;
     }
 
+    /**
+     * @param $targetKey
+     * @param $start
+     * @param $end
+     * @return NumericDecrementer|NumericIncrementer
+     */
     public function range($targetKey, $start, $end)
     {
+        // TODO: type validation
         if ($start <= $end) {
-            new Incrementer($this, $targetKey, $start, $end);
+            return new NumericIncrementer($this, $targetKey, $start, $end);
         }
 
-        return new Decrementer($this, $targetKey, $start, $end);
+        return new NumericDecrementer($this, $targetKey, $start, $end);
     }
 
+    /**
+     * @param $targetKey
+     * @param $from
+     * @param $to
+     * @return DatetimeDecrementer|DatetimeIncrementer
+     */
     public function between($targetKey, $from, $to)
     {
+        // TODO: type validation
+        $fromDate = Carbon::parse($from);
+        $toDate = Carbon::parse($to);
+
+        if ($fromDate->lte($toDate)) {
+            return new DatetimeIncrementer($this, $targetKey, $fromDate, $toDate);
+        }
+
+        return new DatetimeDecrementer($this, $targetKey, $fromDate, $toDate);
     }
 
     public function add(Container $container)

@@ -32,6 +32,7 @@ class ContainerCollection
      */
     public function range($targetKey, $start, $end)
     {
+        $this->add($this->baseContainer->with([$targetKey => $start]));
         // TODO: type validation
         if ($start <= $end) {
             return new NumericIncrementer($this, $targetKey, $start, $end);
@@ -66,7 +67,7 @@ class ContainerCollection
 
     public function getBaseContainer()
     {
-        return $this->baseContainer;
+        return clone $this->baseContainer;
     }
 
     public function dump()

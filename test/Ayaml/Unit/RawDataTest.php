@@ -1,5 +1,5 @@
 <?php
-namespace Ayaml\Test;
+namespace Ayaml\Test\Unit;
 
 use Ayaml\RawData;
 use Symfony\Component\Yaml\Yaml;
@@ -17,7 +17,7 @@ class RawDataTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->subject = new RawData(Yaml::parse(__DIR__ . '/../SampleYaml/User.yaml'));
+        $this->subject = new RawData(Yaml::parse(__DIR__ . '/../../SampleYaml/User.yaml'));
     }
 
     /**

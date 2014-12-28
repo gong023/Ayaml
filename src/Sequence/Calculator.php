@@ -21,7 +21,7 @@ abstract class Calculator
      */
     public function by(callable $func)
     {
-        $overwriteVal = $func();
+        $overwriteVal = $func($this->criteria);
         if ($this->isEnd($overwriteVal)) {
             return $this->containerCollection;
         }
@@ -29,7 +29,6 @@ abstract class Calculator
         $this->criteria = $overwriteVal;
         $container = $this->containerCollection->getBaseContainer();
         $container->with([$this->targetKey => $overwriteVal]);
-
         $this->containerCollection->add($container);
 
         return $this->by($func);

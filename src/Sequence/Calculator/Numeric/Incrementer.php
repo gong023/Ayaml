@@ -8,7 +8,7 @@ class Incrementer extends Calculator implements NumericCalculatorInterface
 {
     public function byOne()
     {
-        return $this->by(function () { return $this->criteria + 1; });
+        return $this->by(function ($criteria) { return $criteria + 1; });
     }
 
     /**
@@ -17,6 +17,6 @@ class Incrementer extends Calculator implements NumericCalculatorInterface
      */
     function isEnd($overwriteVal)
     {
-        return $overwriteVal >= $this->end;
+        return $overwriteVal > $this->end;
     }
 }

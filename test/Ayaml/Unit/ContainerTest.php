@@ -1,5 +1,5 @@
 <?php
-namespace Ayaml\Test;
+namespace Ayaml\Test\Unit;
 
 use Ayaml\Container;
 use Ayaml\RawData;
@@ -18,7 +18,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $rawData = new RawData(Yaml::parse(__DIR__ . '/../SampleYaml/User.yaml'));
+        $rawData = new RawData(Yaml::parse(__DIR__ . '/../../SampleYaml/User.yaml'));
         $this->subject = new Container($rawData);
     }
 

@@ -1,5 +1,5 @@
 <?php
-namespace Ayaml\Test;
+namespace Ayaml\Test\Unit;
 
 use Ayaml\Ayaml;
 

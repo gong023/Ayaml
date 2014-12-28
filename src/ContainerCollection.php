@@ -32,8 +32,8 @@ class ContainerCollection
      */
     public function range($targetKey, $start, $end)
     {
-        $this->add($this->baseContainer->with([$targetKey => $start]));
         // TODO: type validation
+        $this->add($this->baseContainer->with([$targetKey => $start]));
         if ($start <= $end) {
             return new NumericIncrementer($this, $targetKey, $start, $end);
         }
@@ -53,6 +53,7 @@ class ContainerCollection
         $fromDate = Carbon::parse($from);
         $toDate = Carbon::parse($to);
 
+        $this->add($this->baseContainer->with([$targetKey => $fromDate->toDateTimeString()]));
         if ($fromDate->lte($toDate)) {
             return new DatetimeIncrementer($this, $targetKey, $fromDate, $toDate);
         }

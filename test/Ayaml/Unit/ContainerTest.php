@@ -18,7 +18,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $rawData = new RawData(Yaml::parse(__DIR__ . '/../../SampleYaml/User.yaml'));
+        $rawData = new RawData(Yaml::parse(__DIR__ . '/../../SampleYaml/user2.yaml'));
         $this->subject = new Container($rawData);
     }
 

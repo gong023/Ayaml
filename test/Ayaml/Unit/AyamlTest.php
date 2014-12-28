@@ -21,7 +21,7 @@ class AyamlTest extends \PHPUnit_Framework_TestCase
     public static function fileNameProvider()
     {
         return [
-            ['User'], ['User.yml'], ['User.yaml']
+            ['User'], ['user.yml'], ['user2.yaml']
         ];
     }
 

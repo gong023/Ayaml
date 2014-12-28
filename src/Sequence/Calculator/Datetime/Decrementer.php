@@ -2,77 +2,51 @@
 
 namespace Ayaml\Sequence\Calculator\Datetime;
 
-use Ayaml\Sequence\Calculator;
 use Carbon\Carbon;
 
 /**
  * Class Incrementer
  *
  * @package Ayaml\Sequence\Calculator\Datetime
- * @property \Carbon\Carbon criteria
  * @property \Carbon\Carbon end
  */
-class Decrementer extends Calculator implements DatetimeCalculatorInterface
+class Decrementer extends DatetimeCalculator implements DatetimeCalculatorInterface
 {
 
     /**
      * @param string $overwriteVal
      * @return bool
      */
-    function isEnd($overwriteVal)
+    public function isEnd($overwriteVal)
     {
-        return Carbon::parse($overwriteVal)->lte($this->end);
+        return Carbon::parse($overwriteVal)->lt($this->end);
     }
 
     public function byDay($format = null)
     {
-        return $this->by(function () use ($format) {
-            $dayAgo = $this->criteria->copy()->subDay();
-
-            if (! is_null($format)) {
-                return $dayAgo->format($format);
-            }
-
-            return $dayAgo->toDateTimeString();
-        });
+        return $this->by(function ($originalDate) {
+            return Carbon::parse($originalDate)->subDay()->toDateTimeString();
+        }, $format);
     }
 
     public function byWeek($format = null)
     {
-        return $this->by(function () use ($format) {
-            $weekAgo = $this->criteria->copy()->subWeek();
-
-            if (! is_null($format)) {
-                return $weekAgo->format($format);
-            }
-
-            return $weekAgo->toDateTimeString();
-        });
+        return $this->by(function ($originalDate) {
+            return Carbon::parse($originalDate)->subWeek()->toDateTimeString();
+        }, $format);
     }
 
     public function byMonth($format = null)
     {
-        return $this->by(function () use ($format) {
-            $monthAgo = $this->criteria->copy()->subMonth();
-
-            if (! is_null($format)) {
-                return $monthAgo->format($format);
-            }
-
-            return $monthAgo->toDateTimeString();
-        });
+        return $this->by(function ($originalDate) {
+            return Carbon::parse($originalDate)->subMonth()->toDateTimeString();
+        }, $format);
     }
 
     public function byYear($format = null)
     {
-        return $this->by(function () use ($format) {
-            $yearAgo = $this->criteria->subYear();
-
-            if (! is_null($format)) {
-                return $yearAgo->format($format);
-            }
-
-            return $yearAgo->toDateTimeString();
-        });
+        return $this->by(function ($originalDate) {
+            return Carbon::parse($originalDate)->subYear()->toDateTimeString();
+        }, $format);
     }
 }

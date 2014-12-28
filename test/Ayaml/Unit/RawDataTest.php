@@ -17,7 +17,7 @@ class RawDataTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->subject = new RawData(Yaml::parse(__DIR__ . '/../../SampleYaml/User.yaml'));
+        $this->subject = new RawData(Yaml::parse(__DIR__ . '/../../SampleYaml/user2.yaml'));
     }
 
     /**

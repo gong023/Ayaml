@@ -38,5 +38,5 @@ abstract class Calculator
      * @param $overwriteVal
      * @return bool
      */
-    abstract function isEnd($overwriteVal);
+    abstract public function isEnd($overwriteVal);
 }

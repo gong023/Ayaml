@@ -6,6 +6,9 @@ use Ayaml\Sequence\Calculator;
 
 class Incrementer extends Calculator implements NumericCalculatorInterface
 {
+    /**
+     * @return \Ayaml\ContainerCollection
+     */
     public function byOne()
     {
         return $this->by(function ($criteria) { return $criteria + 1; });

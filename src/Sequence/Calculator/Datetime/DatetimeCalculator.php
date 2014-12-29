@@ -22,6 +22,11 @@ class DatetimeCalculator extends Calculator
         throw new \Exception('implemented at subclass');
     }
 
+    /**
+     * @param callable $func
+     * @param null     $format
+     * @return \Ayaml\ContainerCollection
+     */
     public function by(callable $func, $format = null)
     {
         if (! is_null($format)) {

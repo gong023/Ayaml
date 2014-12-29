@@ -4,8 +4,21 @@ namespace Ayaml\Sequence;
 
 use Ayaml\ContainerCollection;
 
+/**
+ * Class Calculator
+ *
+ * @package Ayaml\Sequence
+ */
 abstract class Calculator
 {
+    protected $index = 0;
+
+    /**
+     * @param ContainerCollection $containerCollection
+     * @param string              $targetKey
+     * @param mixed               $start
+     * @param mixed               $end
+     */
     public function __construct(ContainerCollection $containerCollection, $targetKey, $start, $end)
     {
         $this->containerCollection = $containerCollection;
@@ -23,13 +36,14 @@ abstract class Calculator
     {
         $overwriteVal = $func($this->criteria);
         if ($this->isEnd($overwriteVal)) {
+            $this->index = 0;
             return $this->containerCollection;
         }
 
+        $this->index += 1;
         $this->criteria = $overwriteVal;
-        $container = $this->containerCollection->getBaseContainer();
-        $container->with([$this->targetKey => $overwriteVal]);
-        $this->containerCollection->add($container);
+        $container = $this->containerCollection->get($this->index)->with([$this->targetKey => $overwriteVal]);
+        $this->containerCollection->add($this->index, $container);
 
         return $this->by($func);
     }

@@ -21,6 +21,10 @@ class Incrementer extends DatetimeCalculator implements DatetimeCalculatorInterf
         return Carbon::parse($overwriteVal)->gt($this->end);
     }
 
+    /**
+     * @param null $format
+     * @return \Ayaml\ContainerCollection
+     */
     public function byDay($format = null)
     {
         return $this->by(function ($originalDate) {
@@ -28,6 +32,10 @@ class Incrementer extends DatetimeCalculator implements DatetimeCalculatorInterf
         }, $format);
     }
 
+    /**
+     * @param null $format
+     * @return \Ayaml\ContainerCollection
+     */
     public function byWeek($format = null)
     {
         return $this->by(function ($originalDate) {
@@ -35,6 +43,10 @@ class Incrementer extends DatetimeCalculator implements DatetimeCalculatorInterf
         }, $format);
     }
 
+    /**
+     * @param null $format
+     * @return \Ayaml\ContainerCollection
+     */
     public function byMonth($format = null)
     {
         return $this->by(function ($originalDate) {
@@ -42,6 +54,10 @@ class Incrementer extends DatetimeCalculator implements DatetimeCalculatorInterf
         }, $format);
     }
 
+    /**
+     * @param null $format
+     * @return \Ayaml\ContainerCollection
+     */
     public function byYear($format = null)
     {
         return $this->by(function ($originalDate) {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Ayaml;
 
 use Ayaml\Sequence\Calculator\Numeric\Decrementer as NumericDecrementer;
@@ -7,6 +8,11 @@ use Ayaml\Sequence\Calculator\Datetime\Decrementer as DatetimeDecrementer;
 use Ayaml\Sequence\Calculator\Datetime\Incrementer as DatetimeIncrementer;
 use Carbon\Carbon;
 
+/**
+ * Class ContainerCollection
+ *
+ * @package Ayaml
+ */
 class ContainerCollection
 {
     /**
@@ -33,7 +39,7 @@ class ContainerCollection
     public function range($targetKey, $start, $end)
     {
         // TODO: type validation
-        $this->add($this->baseContainer->with([$targetKey => $start]));
+        $this->add(0, $this->baseContainer->with([$targetKey => $start]));
         if ($start <= $end) {
             return new NumericIncrementer($this, $targetKey, $start, $end);
         }
@@ -53,7 +59,7 @@ class ContainerCollection
         $fromDate = Carbon::parse($from);
         $toDate = Carbon::parse($to);
 
-        $this->add($this->baseContainer->with([$targetKey => $fromDate->toDateTimeString()]));
+        $this->add(0, $this->baseContainer->with([$targetKey => $fromDate->toDateTimeString()]));
         if ($fromDate->lte($toDate)) {
             return new DatetimeIncrementer($this, $targetKey, $fromDate, $toDate);
         }
@@ -61,16 +67,31 @@ class ContainerCollection
         return new DatetimeDecrementer($this, $targetKey, $fromDate, $toDate);
     }
 
-    public function add(Container $container)
+    /**
+     * @param int       $index
+     * @param Container $container
+     */
+    public function add($index, Container $container)
     {
-        array_push($this->containers, $container);
+        $this->containers[$index] = $container;
     }
 
-    public function getBaseContainer()
+    /**
+     * @param $index
+     * @return Container
+     */
+    public function get($index)
     {
+        if (isset($this->containers[$index])) {
+            return $this->containers[$index];
+        }
+
         return clone $this->baseContainer;
     }
 
+    /**
+     * @return array
+     */
     public function dump()
     {
         $containersArray = [];

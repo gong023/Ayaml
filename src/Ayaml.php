@@ -50,6 +50,10 @@ class Ayaml
         self::$basePath = preg_replace('/\/$/', '', $basePath);
     }
 
+    /**
+     * @param Container $container
+     * @return ContainerCollection
+     */
     public static function seq(Container $container)
     {
         return new ContainerCollection($container);

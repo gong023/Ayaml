@@ -1,6 +1,9 @@
 <?php
 namespace Ayaml;
 
+use Ayaml\Fixture\AyamlSchemaNotFoundException;
+use Ayaml\Fixture\YamlData;
+
 /**
  * Class Container
  * @package Ayaml
@@ -8,9 +11,9 @@ namespace Ayaml;
 class Container
 {
     /**
-     * @var RawData
+     * @var YamlData
      */
-    private $rawData;
+    private $yamlData;
 
     /**
      * @var null|array
@@ -18,11 +21,11 @@ class Container
     private $resultData = null;
 
     /**
-     * @param RawData $rawData
+     * @param YamlData $yamlData
      */
-    public function __construct(RawData $rawData)
+    public function __construct(YamlData $yamlData)
     {
-        $this->rawData = $rawData;
+        $this->yamlData = $yamlData;
     }
 
     /**
@@ -32,7 +35,7 @@ class Container
      */
     public function schema($name)
     {
-        $this->resultData = $this->rawData->getSchema($name);
+        $this->resultData = $this->yamlData->getSchema($name);
 
         return $this;
     }

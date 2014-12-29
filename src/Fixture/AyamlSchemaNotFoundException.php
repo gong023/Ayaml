@@ -1,5 +1,6 @@
 <?php
-namespace Ayaml;
+
+namespace Ayaml\Fixture;
 
 /**
  * Class AyamlSchemaNotFoundException

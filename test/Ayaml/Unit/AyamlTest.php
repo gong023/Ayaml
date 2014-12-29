@@ -27,7 +27,7 @@ class AyamlTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Ayaml\AyamlFixtureFileNotFoundException
+     * @expectedException \Ayaml\Fixture\AyamlFixtureFileNotFoundException
      */
     public function throwsExceptionWhenFixtureFileNotFound()
     {

@@ -1,5 +1,5 @@
 <?php
-namespace Ayaml;
+namespace Ayaml\Fixture;
 
 /**
  * Class AyamlFixtureFileNotFoundException

@@ -2,7 +2,7 @@
 
 namespace Ayaml;
 
-use Symfony\Component\Yaml\Yaml;
+use Ayaml\Fixture\YamlData;
 
 /**
  * Class Ayaml
@@ -19,7 +19,6 @@ class Ayaml
      * @param string $fileName
      * @return Container
      * @throws AyamlBasePathNotFoundException
-     * @throws AyamlFixtureFileNotFoundException
      */
     public static function file($fileName)
     {
@@ -27,19 +26,9 @@ class Ayaml
             throw new AyamlBasePathNotFoundException();
         }
 
-        if (file_exists(self::$basePath. '/' . $fileName)) {
-            $realFilePath = self::$basePath . '/' . $fileName;
-        } elseif (file_exists(self::$basePath . '/' . $fileName . '.yml')) {
-            $realFilePath = self::$basePath . '/' . $fileName . '.yml';
-        } elseif (file_exists(self::$basePath . '/' . $fileName . '.yaml')) {
-            $realFilePath = self::$basePath . '/' . $fileName . '.yaml';
-        } else {
-            throw new AyamlFixtureFileNotFoundException('base path: ' . self::$basePath . ' / file name:' . $fileName);
-        }
+        $yamlData = new YamlData(self::$basePath, $fileName);
 
-        $rawData = new RawData(Yaml::parse($realFilePath));
-
-        return new Container($rawData);
+        return new Container($yamlData);
     }
 
     /**

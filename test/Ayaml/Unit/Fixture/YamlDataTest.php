@@ -1,23 +1,22 @@
 <?php
-namespace Ayaml\Test\Unit;
+namespace Ayaml\Test\Unit\Fixture;
 
-use Ayaml\RawData;
-use Symfony\Component\Yaml\Yaml;
+use Ayaml\Fixture\YamlData;
 
 /**
  * Class RawDataTest
  * @package Ayaml\Test
  */
-class RawDataTest extends \PHPUnit_Framework_TestCase
+class YamlDataTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var RawData
+     * @var YamlData
      */
-    private $subject;
+    private $yamlData;
 
     public function setUp()
     {
-        $this->subject = new RawData(Yaml::parse(__DIR__ . '/../../SampleYaml/user2.yaml'));
+        $this->yamlData = new YamlData(__DIR__ . '/../../../SampleYaml/', 'user.yml');
     }
 
     /**
@@ -25,7 +24,7 @@ class RawDataTest extends \PHPUnit_Framework_TestCase
      */
     public function getSchemaCorrectly()
     {
-        $validUser = $this->subject->getSchema('valid_user');
+        $validUser = $this->yamlData->getSchema('valid_user');
         $expected = [
             'id'      => 1,
             'name'    => 'Taro',
@@ -37,10 +36,10 @@ class RawDataTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Ayaml\AyamlSchemaNotFoundException
+     * @expectedException \Ayaml\Fixture\AyamlSchemaNotFoundException
      */
     public function throwsExceptionWhenSchemaNotFound()
     {
-        $this->subject->getSchema('no existing schema');
+        $this->yamlData->getSchema('no existing schema');
     }
 }

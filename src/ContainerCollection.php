@@ -25,6 +25,9 @@ class ContainerCollection
      */
     private $baseContainer;
 
+    /**
+     * @param Container $container
+     */
     public function __construct(Container $container)
     {
         $this->baseContainer = $container;

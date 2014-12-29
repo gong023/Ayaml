@@ -27,12 +27,12 @@ class Ayaml
             throw new AyamlBasePathNotFoundException();
         }
 
-        if (file_exists(self::$basePath.'/'.$fileName)) {
-            $realFilePath = self::$basePath.'/'.$fileName;
-        } elseif (file_exists(self::$basePath.'/'.$fileName.'.yml')) {
-            $realFilePath = self::$basePath.'/'.$fileName.'.yml';
-        } elseif (file_exists(self::$basePath.'/'.$fileName.'.yaml')) {
-            $realFilePath = self::$basePath.'/'.$fileName.'.yaml';
+        if (file_exists(self::$basePath. '/' . $fileName)) {
+            $realFilePath = self::$basePath . '/' . $fileName;
+        } elseif (file_exists(self::$basePath . '/' . $fileName . '.yml')) {
+            $realFilePath = self::$basePath . '/' . $fileName . '.yml';
+        } elseif (file_exists(self::$basePath . '/' . $fileName . '.yaml')) {
+            $realFilePath = self::$basePath . '/' . $fileName . '.yaml';
         } else {
             throw new AyamlFixtureFileNotFoundException('base path: ' . self::$basePath . ' / file name:' . $fileName);
         }

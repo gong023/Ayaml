@@ -35,10 +35,14 @@ class ContainerCollection
      * @param $start
      * @param $end
      * @return NumericDecrementer|NumericIncrementer
+     * @throws AyamlSeqInvalidTypeException
      */
     public function range($targetKey, $start, $end)
     {
-        // TODO: type validation
+        if (! is_numeric($start) || ! is_numeric($end)) {
+            throw new AyamlSeqInvalidTypeException("'range' expects numeric var");
+        }
+
         $this->add(0, $this->baseContainer->with([$targetKey => $start]));
         if ($start <= $end) {
             return new NumericIncrementer($this, $targetKey, $start, $end);
@@ -52,12 +56,16 @@ class ContainerCollection
      * @param $from
      * @param $to
      * @return DatetimeDecrementer|DatetimeIncrementer
+     * @throws AyamlSeqInvalidTypeException
      */
     public function between($targetKey, $from, $to)
     {
-        // TODO: type validation
-        $fromDate = Carbon::parse($from);
-        $toDate = Carbon::parse($to);
+        try {
+            $fromDate = Carbon::parse($from);
+            $toDate = Carbon::parse($to);
+        } catch (\Exception $e) {
+            throw new AyamlSeqInvalidTypeException("'between' expects date format string");
+        }
 
         $this->add(0, $this->baseContainer->with([$targetKey => $fromDate->toDateTimeString()]));
         if ($fromDate->lte($toDate)) {
@@ -87,6 +95,14 @@ class ContainerCollection
         }
 
         return clone $this->baseContainer;
+    }
+
+    /**
+     * @return Container[]
+     */
+    public function getAll()
+    {
+        return $this->containers;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Ayaml\Sequence\Calculator\Datetime;
 
 use Ayaml\Sequence\Calculator;
+use Carbon\Carbon;
 
 /**
  * Class DatetimeCalculator
@@ -29,12 +30,16 @@ class DatetimeCalculator extends Calculator
      */
     public function by(callable $func, $format = null)
     {
-        if (! is_null($format)) {
-            foreach ($this->containerCollection->dump() as $container) {
+        $ret = parent::by($func);
 
+        if (! is_null($format)) {
+            foreach ($this->containerCollection->getAll() as $container) {
+                $rawData = $container->dump();
+                $formattedDatetime = Carbon::parse($rawData[$this->targetKey])->format($format);
+                $container->with([$this->targetKey => $formattedDatetime]);
             }
         }
 
-        return parent::by($func);
+        return $ret;
     }
 }

@@ -30,18 +30,18 @@ class DecrementerTest extends \PHPUnit_Framework_TestCase
             ->attributeCount(3, 'containers');
     }
 
-//    public function testFormatting()
-//    {
-//        $days = $this->subject->between('created', '2014-01-01 00:00:00', '2014-01-03 00:00:00')->byDay('Y-m-d')->dump();
-//
-//        $expected = [
-//            ['id' => 1, 'name' => 'Taro', 'created' => '2014-01-01'],
-//            ['id' => 1, 'name' => 'Taro', 'created' => '2014-01-02'],
-//            ['id' => 1, 'name' => 'Taro', 'created' => '2014-01-03'],
-//        ];
-//
-//        $this->assertEquals($expected, $days);
-//    }
+    public function testFormatting()
+    {
+        $days = $this->subject->between('created', '2014-01-01 00:00:00', '2014-01-03 00:00:00')->byDay('Y-m-d')->dump();
+
+        $expected = [
+            ['id' => 1, 'name' => 'Taro', 'created' => '2014-01-01'],
+            ['id' => 1, 'name' => 'Taro', 'created' => '2014-01-02'],
+            ['id' => 1, 'name' => 'Taro', 'created' => '2014-01-03'],
+        ];
+
+        $this->assertEquals($expected, $days);
+    }
 
     public function testByWeek()
     {

@@ -2,3 +2,12 @@ valid_user:
   id: 1
   name: Taro
   created: '2014-01-01 00:00:00'
+nested:
+  1:
+    2:
+      3:
+        4:
+          data:
+            id: 2
+            name: Jiro
+            created: '2014-01-01 00:00:00'

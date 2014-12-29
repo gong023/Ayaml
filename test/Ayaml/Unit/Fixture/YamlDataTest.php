@@ -36,6 +36,21 @@ class YamlDataTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    public function getNestedSchema()
+    {
+        $nested = $this->yamlData->getSchema('nested.1.2.3.4.data');
+        $expected = [
+            'id'      => 2,
+            'name'    => 'Jiro',
+            'created' => '2014-01-01 00:00:00',
+        ];
+
+        $this->assertEquals($expected, $nested);
+    }
+
+    /**
+     * @test
      * @expectedException \Ayaml\Fixture\AyamlSchemaNotFoundException
      */
     public function throwsExceptionWhenSchemaNotFound()

@@ -11,6 +11,8 @@ use Symfony\Component\Yaml\Yaml as SymfonyYaml;
  */
 class YamlData
 {
+    const SCHEMA_DELIMITER = '.';
+
     /**
      * @var array
      */
@@ -43,10 +45,21 @@ class YamlData
      */
     public function getSchema($schemaName)
     {
-        if (empty($this->rawData[$schemaName])) {
+        return $this->getSchemaRecursively($schemaName, $this->rawData);
+    }
+
+    private function getSchemaRecursively($schemaName, $rawData)
+    {
+        $specifiedKey = preg_replace('/\\' . self::SCHEMA_DELIMITER . '.*$/', '', $schemaName);
+        if (empty($rawData[$specifiedKey])) {
             throw new AyamlSchemaNotFoundException('specified schema: ' . $schemaName);
         }
 
-        return $this->rawData[$schemaName];
+        $pattern = '/^\w+\\' . self::SCHEMA_DELIMITER . '/';
+        if (preg_match($pattern, $schemaName)) {
+            return $this->getSchemaRecursively(preg_replace($pattern, '', $schemaName), $rawData[$specifiedKey]);
+        }
+
+        return $rawData[$specifiedKey];
     }
 }

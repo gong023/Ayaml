@@ -61,7 +61,6 @@ class IncrementerTest extends \PHPUnit_Framework_TestCase
             ->beInstanceOf('\Ayaml\ContainerCollection')
             ->attributeContainsOnly('\Ayaml\Container', 'containers')
             ->attributeCount(3, 'containers');
-
     }
 
     public function testByYear()
@@ -72,7 +71,5 @@ class IncrementerTest extends \PHPUnit_Framework_TestCase
             ->beInstanceOf('\Ayaml\ContainerCollection')
             ->attributeContainsOnly('\Ayaml\Container', 'containers')
             ->attributeCount(3, 'containers');
-
     }
 }
-

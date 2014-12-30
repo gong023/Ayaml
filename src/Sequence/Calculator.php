@@ -11,8 +11,6 @@ use Ayaml\ContainerCollection;
  */
 abstract class Calculator
 {
-    protected $index = 0;
-
     /**
      * @param ContainerCollection $containerCollection
      * @param string              $targetKey
@@ -36,14 +34,14 @@ abstract class Calculator
     {
         $overwriteVal = $func($this->criteria);
         if ($this->isEnd($overwriteVal)) {
-            $this->index = 0;
+            $this->containerCollection->index = 0;
             return $this->containerCollection;
         }
 
-        $this->index += 1;
+        $this->containerCollection->index += 1;
         $this->criteria = $overwriteVal;
-        $container = $this->containerCollection->get($this->index)->with([$this->targetKey => $overwriteVal]);
-        $this->containerCollection->add($this->index, $container);
+        $container = $this->containerCollection->get()->with([$this->targetKey => $overwriteVal]);
+        $this->containerCollection->add($container);
 
         return $this->by($func);
     }

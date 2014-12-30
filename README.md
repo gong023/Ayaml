@@ -10,7 +10,7 @@ Utility for making Array from Yaml.
 Install Ayaml
 
 ```bash
-composer require --dev gong023/ayaml:dev-master
+composer require --dev gong023/ayaml:0.2.*
 ```
 
 Register yaml dir in testing bootstrap.php
@@ -112,7 +112,7 @@ Ayaml::seq($validUser)->between('created', '2014-03', '2014-01')->byMonth()->dum
 
 // make numeric and date column sequential.
 Ayaml::seq($validUser)
-  ->range('id', 10, 13)->byOne()
+  ->range('id', 10, 12)->byOne()
   ->between('created', '2014-01', '2014-03')->byMonth()
   ->dump();
 =>

@@ -12,7 +12,6 @@ use Carbon\Carbon;
  */
 class Decrementer extends DatetimeCalculator implements DatetimeCalculatorInterface
 {
-
     /**
      * @param string $overwriteVal
      * @return bool

@@ -41,4 +41,3 @@ class ContainerCollectionTest extends \PHPUnit_Framework_TestCase
         $this->containerCollection->between('foo', 'invalid string', 'invalid_string');
     }
 }
-

@@ -16,6 +16,11 @@ use Carbon\Carbon;
 class ContainerCollection
 {
     /**
+     * @var int
+     */
+    public $index = 0;
+
+    /**
      * @var Container[]
      */
     private $containers = [];
@@ -46,7 +51,7 @@ class ContainerCollection
             throw new AyamlSeqInvalidTypeException("'range' expects numeric var");
         }
 
-        $this->add(0, $this->baseContainer->with([$targetKey => $start]));
+        $this->add($this->baseContainer->with([$targetKey => $start]));
         if ($start <= $end) {
             return new NumericIncrementer($this, $targetKey, $start, $end);
         }
@@ -70,42 +75,12 @@ class ContainerCollection
             throw new AyamlSeqInvalidTypeException("'between' expects date format string");
         }
 
-        $this->add(0, $this->baseContainer->with([$targetKey => $fromDate->toDateTimeString()]));
+        $this->add($this->baseContainer->with([$targetKey => $fromDate->toDateTimeString()]));
         if ($fromDate->lte($toDate)) {
             return new DatetimeIncrementer($this, $targetKey, $fromDate, $toDate);
         }
 
         return new DatetimeDecrementer($this, $targetKey, $fromDate, $toDate);
-    }
-
-    /**
-     * @param int       $index
-     * @param Container $container
-     */
-    public function add($index, Container $container)
-    {
-        $this->containers[$index] = $container;
-    }
-
-    /**
-     * @param $index
-     * @return Container
-     */
-    public function get($index)
-    {
-        if (isset($this->containers[$index])) {
-            return $this->containers[$index];
-        }
-
-        return clone $this->baseContainer;
-    }
-
-    /**
-     * @return Container[]
-     */
-    public function getAll()
-    {
-        return $this->containers;
     }
 
     /**
@@ -119,5 +94,36 @@ class ContainerCollection
         }
 
         return $containersArray;
+    }
+
+    /**
+     * @param Container $container
+     */
+    public function add(Container $container)
+    {
+        $this->containers[$this->index] = $container;
+    }
+
+    /**
+     * @param int|null $index
+     * @return Container
+     */
+    public function get($index = null)
+    {
+        $index = is_null($index) ? $this->index : $index;
+
+        if (isset($this->containers[$index])) {
+            return $this->containers[$index];
+        }
+
+        return clone $this->baseContainer;
+    }
+
+    /**
+     * @return Container[]
+     */
+    public function getAll()
+    {
+        return $this->containers;
     }
 }

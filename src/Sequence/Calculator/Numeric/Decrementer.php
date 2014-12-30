@@ -18,7 +18,7 @@ class Decrementer extends Calculator implements NumericCalculatorInterface
      * @param $overwriteVal
      * @return bool
      */
-    function isEnd($overwriteVal)
+    public function isEnd($overwriteVal)
     {
         return $overwriteVal < $this->end;
     }

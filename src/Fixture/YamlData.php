@@ -19,8 +19,8 @@ class YamlData
     private $rawData = [];
 
     /**
-     * @param $basePath
-     * @param $fileName
+     * @param string $basePath
+     * @param string $fileName
      * @throws AyamlFixtureFileNotFoundException
      */
     public function __construct($basePath, $fileName)
@@ -48,6 +48,9 @@ class YamlData
         return $this->getSchemaRecursively($schemaName, $this->rawData);
     }
 
+    /**
+     * @param string $schemaName
+     */
     private function getSchemaRecursively($schemaName, $rawData)
     {
         $specifiedKey = preg_replace('/\\' . self::SCHEMA_DELIMITER . '.*$/', '', $schemaName);

@@ -4,7 +4,13 @@ namespace Ayaml\Sequence\Calculator\Numeric;
 
 interface NumericCalculatorInterface
 {
+    /**
+     * @return \Ayaml\ContainerCollection
+     */
     public function by(callable $func);
 
-    public function byOne();
+    /**
+ * @return \Ayaml\ContainerCollection
+ */
+public function byOne();
 }

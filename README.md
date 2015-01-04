@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/gong023/Ayaml.svg)](https://travis-ci.org/gong023/Ayaml)
 [![Coverage Status](https://img.shields.io/coveralls/gong023/Ayaml.svg?style=flat)](https://coveralls.io/r/gong023/Ayaml)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gong023/Ayaml/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gong023/Ayaml/?branch=master)
 
 Utility for making Array from Yaml.
 

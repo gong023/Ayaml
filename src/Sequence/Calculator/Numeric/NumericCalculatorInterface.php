@@ -10,7 +10,7 @@ interface NumericCalculatorInterface
     public function by(callable $func);
 
     /**
- * @return \Ayaml\ContainerCollection
- */
-public function byOne();
+     * @return \Ayaml\ContainerCollection
+     */
+    public function byOne();
 }

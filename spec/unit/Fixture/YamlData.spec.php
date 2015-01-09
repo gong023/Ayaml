@@ -3,12 +3,12 @@
 use \Ayaml\Fixture\YamlData;
 
 describe('\\Ayaml\\Fixture\\YamlData', function() {
-    beforeEach(function() {
-        $this->yamlData = new YamlData(__DIR__ . '/../../SampleYaml/', 'user.yml');
-    });
-
     context('getSchema', function() {
         context('normal case', function() {
+            beforeEach(function() {
+                $this->yamlData = new YamlData(__DIR__ . '/../../SampleYaml/', 'user.yml');
+            });
+
             it('should get schema correctly', function() {
                 $validUser = $this->yamlData->getSchema('valid_user');
                 $expected = [
@@ -33,10 +33,16 @@ describe('\\Ayaml\\Fixture\\YamlData', function() {
         });
 
         context('abnormal case', function() {
-            it('should throw when schema not found', function() {
+            it('should throw when file not found', function() {
+              expect(function() {
+                  new YamlData('invalid path', 'invalid file');
+              })->to->throw('\\Ayaml\\Fixture\\AyamlFixtureFileNotFoundException');
+            });
 
+            it('should throw when schema not found', function() {
                 expect(function() {
-                    $this->yamlData->getSchema('no existing schema');
+                    $yamlData = new YamlData(__DIR__ . '/../../SampleYaml/', 'user.yml');
+                    $yamlData->getSchema('no existing schema');
                 })->to->throw('\\Ayaml\\Fixture\\AyamlSchemaNotFoundException');
             });
         });

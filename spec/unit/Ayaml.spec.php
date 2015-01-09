@@ -18,7 +18,7 @@ describe('\\Ayaml\\Ayaml', function() {
             });
 
             it('should return Container class with detecting .yaml extension', function() {
-                expect(Ayaml::file('user2.yaml'))->to->instanceof('\\Ayaml\\Container');
+                expect(Ayaml::file('a.yaml'))->to->instanceof('\\Ayaml\\Container');
             });
         });
 

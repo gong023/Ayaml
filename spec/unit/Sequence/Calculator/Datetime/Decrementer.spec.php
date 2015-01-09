@@ -4,7 +4,7 @@ use Ayaml\Ayaml;
 
 describe('\\Ayaml\\Sequence\\Calculator\\Datetime\\Decrementer', function() {
     beforeEach(function() {
-        Ayaml::registerBasePath(__DIR__ . '/../../../../../SampleYaml');
+        Ayaml::registerBasePath(__DIR__ . '/../../../../SampleYaml');
         $container = Ayaml::file('user')->schema('valid_user');
         $this->subject = Ayaml::seq($container);
     });

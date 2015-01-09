@@ -4,7 +4,7 @@ use Ayaml\Ayaml;
 
 describe('\\Ayaml\\Sequence\\Calculator\\Datetime\\Incrementer', function() {
     beforeEach(function() {
-        Ayaml::registerBasePath(__DIR__ . '/../../../../../SampleYaml');
+        Ayaml::registerBasePath(__DIR__ . '/../../../../SampleYaml');
         $container = Ayaml::file('user')->schema('valid_user');
         $this->subject = Ayaml::seq($container);
     });
@@ -35,7 +35,7 @@ describe('\\Ayaml\\Sequence\\Calculator\\Datetime\\Incrementer', function() {
         });
 
         it('should be specified duration by Year', function() {
-            $years = $this->subject->between('created', '2016-01-01 00:00:00', '2014-01-01 00:00:00')->byYear()->getAll();
+            $years = $this->subject->between('created', '2014-01-01 00:00:00', '2016-01-01 00:00:00')->byYear()->getAll();
 
             expect($years)
                 ->to->an('array')

@@ -9,5 +9,9 @@ before_script:
   - mkdir -p build/logs
   - composer install
 
+script:
+  - vendor/bin/peridot spec/
+
 after_script:
+ - vendor/bin/peridot spec/ -r clover-code-coverage --code-coverage-path "build/logs/clover.xml"
  - php vendor/bin/coveralls -v

@@ -41,7 +41,6 @@ class YamlData
     /**
      * @param  string                       $schemaName
      * @return array
-     * @throws AyamlSchemaNotFoundException
      */
     public function getSchema($schemaName)
     {
@@ -50,6 +49,9 @@ class YamlData
 
     /**
      * @param string $schemaName
+     * @param        $rawData
+     * @return array
+     * @throws AyamlSchemaNotFoundException
      */
     private function getSchemaRecursively($schemaName, $rawData)
     {

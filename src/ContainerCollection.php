@@ -72,7 +72,7 @@ class ContainerCollection
             $fromDate = Carbon::parse($from);
             $toDate = Carbon::parse($to);
         } catch (\Exception $e) {
-            throw new AyamlSeqInvalidTypeException("'between' expects date format string");
+            throw new AyamlSeqInvalidTypeException("'between' expects date format string / " . $e->getMessage());
         }
 
         $this->add($this->baseContainer->with([$targetKey => $fromDate->toDateTimeString()]));

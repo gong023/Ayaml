@@ -22,7 +22,7 @@ class Ayaml
      */
     public static function file($fileName)
     {
-        if (is_null(self::$basePath)) {
+        if (empty(self::$basePath)) {
             throw new AyamlBasePathNotFoundException();
         }
 

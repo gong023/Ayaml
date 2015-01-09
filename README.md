@@ -93,6 +93,7 @@ Ayaml::seq($validUser)->range('id', 10, 12)->by(function($id) { return $id + 2; 
 ];
 
 // make incremental date sequence.
+// you can specify duration 'byDay','byWeek','byMonth','byYear'
 Ayaml::seq($validUser)->between('created', '2014-01', '2014-03')->byMonth()->dump();
 =>
 [
@@ -102,7 +103,6 @@ Ayaml::seq($validUser)->between('created', '2014-01', '2014-03')->byMonth()->dum
 ];
 
 // make decremental date sequence.
-// you can specify duration 'byDay','byWeek','byMonth','byYear'
 Ayaml::seq($validUser)->between('created', '2014-03', '2014-01')->byMonth()->dump();
 =>
 [

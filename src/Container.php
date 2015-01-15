@@ -43,6 +43,7 @@ class Container
     /**
      * @param array $overwrites
      * @return $this
+     * @throws AyamlNoExistingKeyException
      * @throws AyamlSchemaNotSpecifiedException
      */
     public function with(array $overwrites)
@@ -51,10 +52,11 @@ class Container
             $message = 'you should set schema before "with". ex.) Ayaml::file("f")->schema("s")->with(["k" => "v"])->dump()';
             throw new AyamlSchemaNotSpecifiedException($message);
         }
-        foreach ($overwrites as $overwrite_key => $overwrite_val) {
-            if (isset($this->resultData[$overwrite_key])) {
-                $this->resultData[$overwrite_key] = $overwrite_val;
+        foreach ($overwrites as $overwriteKey => $overwriteVal) {
+            if (! array_key_exists($overwriteKey, $this->resultData)) {
+                throw new AyamlNoExistingKeyException("key: $overwriteKey does not exist.");
             }
+            $this->resultData[$overwriteKey] = $overwriteVal;
         }
 
         return $this;

@@ -41,5 +41,11 @@ describe('\\Ayaml\\Container', function() {
                 $this->subject->with(['name' => 'John'])->dump();
             })->to->throw('\\Ayaml\\AyamlSchemaNotSpecifiedException');
         });
+
+        it('should throw when you update no existing key', function() {
+            expect(function() {
+                $this->subject->schema('valid_user')->with(['invalidKey' => 'val']);
+            })->to->throw('\\Ayaml\\AyamlNoExistingKeyException');
+        });
     });
 });

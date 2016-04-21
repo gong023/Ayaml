@@ -2,13 +2,12 @@
     "name": "gong023/ayaml",
     "description": "utility to convert yaml to array",
     "require": {
-        "symfony/yaml": "~2.1|~3.0",
+        "symfony/yaml": "~2.0",
         "nesbot/Carbon": "*",
         "gong023/retry": "^0.2.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
-        "gong023/assert_chain": "dev-master",
         "fabpot/php-cs-fixer": "1.*",
         "peridot-php/peridot": "1.18.0",
         "peridot-php/leo": "1.5.0",

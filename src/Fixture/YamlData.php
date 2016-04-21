@@ -82,7 +82,7 @@ class YamlData
                     throw new AyamlFixtureFileNotFoundException('base path: ' . $basePath . ' / file name:' . $fileName);
                 }
 
-                return SymfonyYaml::parse($filePath);
+                return SymfonyYaml::parse($filePath, true);
             });
 
         return new self($rawData);

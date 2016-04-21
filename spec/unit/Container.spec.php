@@ -5,7 +5,7 @@ use Ayaml\Container;
 
 describe('\\Ayaml\\Container', function() {
     beforeEach(function() {
-        $yamlData = new YamlData(__DIR__ . '/../SampleYaml', 'user');
+        $yamlData = YamlData::load([__DIR__ . '/../SampleYaml'], 'user');
         $this->subject = new Container($yamlData);
     });
 

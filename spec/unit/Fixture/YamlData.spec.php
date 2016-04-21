@@ -1,12 +1,31 @@
 <?php
 
+use Ayaml\Ayaml;
 use \Ayaml\Fixture\YamlData;
+use Symfony\Component\Yaml\Yaml as SymfonyYaml;
 
 describe('\\Ayaml\\Fixture\\YamlData', function() {
+    context('load', function() {
+        beforeEach(function() {
+            Ayaml::registerBasePath(__DIR__ . '/../../SampleYaml');
+            Ayaml::registerBasePath(__DIR__ . '/../../SampleYaml/AnotherPath');
+        });
+        it('should load multiple paths', function() {
+            expect(Ayaml::file('another_path'))->to->be->instanceof('\\Ayaml\\Container');
+        });
+
+        afterEach(function() {
+            $reflection = new \ReflectionProperty('\\Ayaml\\Ayaml', 'basePaths');
+            $reflection->setAccessible(true);
+            $reflection->setValue([]);
+        });
+    });
+
     context('getSchema', function() {
         context('normal case', function() {
             beforeEach(function() {
-                $this->yamlData = new YamlData(__DIR__ . '/../../SampleYaml/', 'user.yml');
+                $data = SymfonyYaml::parse(__DIR__ . '/../../SampleYaml/user.yml');
+                $this->yamlData = new YamlData($data);
             });
 
             it('should get schema correctly', function() {
@@ -35,13 +54,14 @@ describe('\\Ayaml\\Fixture\\YamlData', function() {
         context('abnormal case', function() {
             it('should throw when file not found', function() {
               expect(function() {
-                  new YamlData('invalid path', 'invalid file');
+                  YamlData::load(['invalid path'], 'invalid file');
               })->to->throw('\\Ayaml\\Fixture\\AyamlFixtureFileNotFoundException');
             });
 
             it('should throw when schema not found', function() {
                 expect(function() {
-                    $yamlData = new YamlData(__DIR__ . '/../../SampleYaml/', 'user.yml');
+                    $data = SymfonyYaml::parse(__DIR__ . '/../../SampleYaml/user.yml');
+                    $yamlData = new YamlData($data);
                     $yamlData->getSchema('no existing schema');
                 })->to->throw('\\Ayaml\\Fixture\\AyamlSchemaNotFoundException');
             });

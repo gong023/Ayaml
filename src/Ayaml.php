@@ -11,9 +11,9 @@ use Ayaml\Fixture\YamlData;
 class Ayaml
 {
     /**
-     * @var null|string
+     * @var array
      */
-    private static $basePath = null;
+    private static $basePaths = [];
 
     /**
      * @param string $fileName
@@ -22,11 +22,11 @@ class Ayaml
      */
     public static function file($fileName)
     {
-        if (empty(self::$basePath)) {
+        if (empty(self::$basePaths)) {
             throw new AyamlBasePathNotFoundException();
         }
 
-        $yamlData = new YamlData(self::$basePath, $fileName);
+        $yamlData = YamlData::load(self::$basePaths, $fileName);
 
         return new Container($yamlData);
     }
@@ -36,7 +36,7 @@ class Ayaml
      */
     public static function registerBasePath($basePath)
     {
-        self::$basePath = preg_replace('/\/$/', '', $basePath);
+        self::$basePaths[] = preg_replace('/\/$/', '', $basePath);
     }
 
     /**

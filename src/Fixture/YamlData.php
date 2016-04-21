@@ -2,6 +2,7 @@
 
 namespace Ayaml\Fixture;
 
+use Retry\Retry;
 use Symfony\Component\Yaml\Yaml as SymfonyYaml;
 
 /**
@@ -19,23 +20,11 @@ class YamlData
     private $rawData = [];
 
     /**
-     * @param string $basePath
-     * @param string $fileName
-     * @throws AyamlFixtureFileNotFoundException
+     * @param array $rawData
      */
-    public function __construct($basePath, $fileName)
+    public function __construct(array $rawData)
     {
-        if (file_exists($basePath. '/' . $fileName)) {
-            $realFilePath = $basePath . '/' . $fileName;
-        } elseif (file_exists($basePath . '/' . $fileName . '.yml')) {
-            $realFilePath = $basePath . '/' . $fileName . '.yml';
-        } elseif (file_exists($basePath . '/' . $fileName . '.yaml')) {
-            $realFilePath = $basePath . '/' . $fileName . '.yaml';
-        } else {
-            throw new AyamlFixtureFileNotFoundException('base path: ' . $basePath . ' / file name:' . $fileName);
-        }
-
-        $this->rawData = SymfonyYaml::parse($realFilePath);
+        $this->rawData = $rawData;
     }
 
     /**
@@ -45,6 +34,11 @@ class YamlData
     public function getSchema($schemaName)
     {
         return $this->getSchemaRecursively($schemaName, $this->rawData);
+    }
+
+    public function getRaw()
+    {
+        return $this->rawData;
     }
 
     /**
@@ -66,5 +60,31 @@ class YamlData
         }
 
         return $rawData[$specifiedKey];
+    }
+
+    /**
+     * @param array $paths
+     * @param $fileName
+     * @return YamlData
+     */
+    public static function load(array $paths, $fileName)
+    {
+        $rawData = (new Retry())
+            ->retry(count($paths), function ($index) use ($paths, $fileName) {
+                $basePath = $paths[$index];
+                if (file_exists($basePath. '/' . $fileName)) {
+                    $filePath = $basePath . '/' . $fileName;
+                } elseif (file_exists($basePath . '/' . $fileName . '.yml')) {
+                    $filePath = $basePath . '/' . $fileName . '.yml';
+                } elseif (file_exists($basePath . '/' . $fileName . '.yaml')) {
+                    $filePath = $basePath . '/' . $fileName . '.yaml';
+                } else {
+                    throw new AyamlFixtureFileNotFoundException('base path: ' . $basePath . ' / file name:' . $fileName);
+                }
+
+                return SymfonyYaml::parse($filePath, true);
+            });
+
+        return new self($rawData);
     }
 }

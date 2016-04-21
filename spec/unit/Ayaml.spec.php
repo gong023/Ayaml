@@ -25,7 +25,9 @@ describe('\\Ayaml\\Ayaml', function() {
         context('abnormal case', function() {
             it('should throw when base path is not registered', function() {
                 expect(function() {
-                    Ayaml::registerBasePath(null);
+                    $reflection = new \ReflectionProperty('\\Ayaml\\Ayaml', 'basePaths');
+                    $reflection->setAccessible(true);
+                    $reflection->setValue([]);
                     Ayaml::file('user');
                 })->to->throw('\\Ayaml\\AyamlBasePathNotFoundException');
             });

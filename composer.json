@@ -2,7 +2,7 @@
     "name": "gong023/ayaml",
     "description": "utility to convert yaml to array",
     "require": {
-        "symfony/yaml": "~2.0",
+        "symfony/yaml": "3.1.2",
         "nesbot/Carbon": "*",
         "gong023/retry": "^0.2.0"
     },

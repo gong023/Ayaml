@@ -24,7 +24,7 @@ describe('\\Ayaml\\Fixture\\YamlData', function() {
     context('getSchema', function() {
         context('normal case', function() {
             beforeEach(function() {
-                $data = SymfonyYaml::parse(__DIR__ . '/../../SampleYaml/user.yml', true);
+                $data = SymfonyYaml::parse(file_get_contents(__DIR__ . '/../../SampleYaml/user.yml', SymfonyYaml::PARSE_EXCEPTION_ON_INVALID_TYPE));
                 $this->yamlData = new YamlData($data);
             });
 
@@ -60,7 +60,7 @@ describe('\\Ayaml\\Fixture\\YamlData', function() {
 
             it('should throw when schema not found', function() {
                 expect(function() {
-                    $data = SymfonyYaml::parse(__DIR__ . '/../../SampleYaml/user.yml', true);
+                    $data = SymfonyYaml::parse(file_get_contents(__DIR__ . '/../../SampleYaml/user.yml', SymfonyYaml::PARSE_EXCEPTION_ON_INVALID_TYPE));
                     $yamlData = new YamlData($data);
                     $yamlData->getSchema('no existing schema');
                 })->to->throw('\\Ayaml\\Fixture\\AyamlSchemaNotFoundException');

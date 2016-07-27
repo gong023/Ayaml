@@ -2,8 +2,9 @@
     "name": "gong023/ayaml",
     "description": "utility to convert yaml to array",
     "require": {
-        "symfony/yaml": "~2.0",
-        "nesbot/Carbon": "*",
+        "php": ">=5.5",
+        "symfony/yaml": "3.1.*",
+        "nesbot/carbon": "~1",
         "gong023/retry": "^0.2.0"
     },
     "require-dev": {

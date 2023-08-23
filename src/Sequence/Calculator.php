@@ -11,6 +11,18 @@ use Ayaml\ContainerCollection;
  */
 abstract class Calculator
 {
+    /** @var ContainerCollection */
+    protected $containerCollection;
+
+    /** @var string */
+    protected $targetKey;
+
+    /** @var mixed */
+    protected $criteria;
+
+    /** @var mixed */
+    protected $end;
+
     /**
      * @param ContainerCollection $containerCollection
      * @param string              $targetKey
